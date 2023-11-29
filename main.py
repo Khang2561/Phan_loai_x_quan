@@ -22,7 +22,8 @@ if image is not None:
     label = str(st.write(model.predict(vector))[0])
 
     st.header('Result')
-    st.text(class_list[label])import streamlit as st
+    st.text(class_list[label])
+import streamlit as st
 from PIL import Image
 import pickle as pkl
 import numpy as np
