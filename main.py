@@ -3,23 +3,24 @@ from PIL import Image
 import pickle as pkl
 import numpy as np
 
-class_list = {'0': 'Normal', '1': 'Pneumonia'}
+class_list = {'0': 'Normal','1': 'Pneumonia'}
 
-st.title('Pneumonia Detection')
+st.title('Pneumonia Detecion')
+
 input = open('lrc_xray.pkl', 'rb')
 model = pkl.load(input)
 
-st.header('Upload an Image')
-image = st.file_uploader('Choose an image', type=(['png', 'jpg', 'jpeg']) )
+st.header('Upload an image')
+image = st.file_uploader('Choose an image', type=(['png', 'jpg', 'jpeg']))
 
 if image is not None:
   image = Image.open(image)
-  st.image(image, caption = 'Test image')
+  st.image(image, caption='Test image')
 
   if st.button('Predict'):
-    image = image.resize((227*227*3), 1)
+    image = image.resize((227*227*3, 1))
     vector = np.array(image)
-    label = str(st.write(model.predict(vector))[0])
+    label = str((model.predict(vector))[0])
 
     st.header('Result')
     st.text(class_list[label])
